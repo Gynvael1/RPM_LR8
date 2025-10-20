@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="RPM_LR8.MyPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="150" d:DesignWidth="200">
+    <StackPanel x:Name="Panel" Focusable="True" RenderTransformOrigin="0,0">
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+            <Button Margin="0 0 5 0">Копировать</Button>
+            <Button Margin="0 0 5 0">Вырезать</Button>
+            <Button>Вставить</Button>
+        </StackPanel>
+        <ListBox Height="80">
+            <ListBoxItem Content="A"/>
+            <ListBoxItem Content="B"/>
+            <ListBoxItem Content="C"/>
+            <ListBoxItem Content="D"/>
+            <ListBoxItem Content="E"/>
+        </ListBox>
+        <StackPanel.RenderTransform>
+            <TransformGroup>
+                <TranslateTransform x:Name="Trans"/>
+                <SkewTransform x:Name="Skew"/>
+                <ScaleTransform x:Name="Scale"/>
+            </TransformGroup>
+        </StackPanel.RenderTransform>
+        <StackPanel.Triggers>
+            <EventTrigger RoutedEvent="StackPanel.GotFocus">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(StackPanel.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)" To="345" Duration="0:0:0.4"/>
+                        <DoubleAnimation Storyboard.TargetProperty="(StackPanel.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)" To="200" Duration="0:0:0.4"/>
+                        <DoubleAnimation Storyboard.TargetProperty="(StackPanel.RenderTransform).(TransformGroup.Children)[1].(SkewTransform.AngleY)" To="0" Duration="0:0:0.4"/>
+                        <DoubleAnimation Storyboard.TargetProperty="(StackPanel.RenderTransform).(TransformGroup.Children)[2].(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.4"/>
+                        <DoubleAnimation Storyboard.TargetProperty="(StackPanel.RenderTransform).(TransformGroup.Children)[2].(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.4"/>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.4"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="StackPanel.LostFocus">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(StackPanel.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)" To="{Binding Path=StartX, RelativeSource={RelativeSource AncestorType=UserControl}}" Duration="0:0:0.4"/>
+                        <DoubleAnimation Storyboard.TargetProperty="(StackPanel.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)" To="{Binding Path=StartY, RelativeSource={RelativeSource AncestorType=UserControl}}" Duration="0:0:0.4"/>
+                        <DoubleAnimation Storyboard.TargetProperty="(StackPanel.RenderTransform).(TransformGroup.Children)[1].(SkewTransform.AngleY)" To="{Binding Path=StartSkew, RelativeSource={RelativeSource AncestorType=UserControl}}" Duration="0:0:0.4"/>
+                        <DoubleAnimation Storyboard.TargetProperty="(StackPanel.RenderTransform).(TransformGroup.Children)[2].(ScaleTransform.ScaleY)" To="{Binding Path=StartScaleY, RelativeSource={RelativeSource AncestorType=UserControl}}" Duration="0:0:0.4"/>
+                        <DoubleAnimation Storyboard.TargetProperty="(StackPanel.RenderTransform).(TransformGroup.Children)[2].(ScaleTransform.ScaleX)" To="{Binding Path=StartScaleX, RelativeSource={RelativeSource AncestorType=UserControl}}" Duration="0:0:0.4"/>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="{Binding Path=StartOpacity, RelativeSource={RelativeSource AncestorType=UserControl}}" Duration="0:0:0.4"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </StackPanel.Triggers>
+    </StackPanel>
+</UserControl>
